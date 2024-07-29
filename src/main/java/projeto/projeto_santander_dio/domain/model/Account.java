@@ -1,9 +1,7 @@
 package projeto.projeto_santander_dio.domain.model;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
-
+import java.time.LocalDate;
 
 @Entity(name= "tb_account")
 public class Account {
@@ -12,22 +10,13 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String AccountName;
+    private int balance;
 
-    @Column(precision = 2, scale = 10)
-    private BigDecimal balance;
+    private LocalDate memberSince;
 
-    private int memberSince;
+    private String accountName;
 
-
-    public int getMemberSince() {
-        return memberSince;
-    }
-
-    public void setMemberSince(int memberSince) {
-        this.memberSince = memberSince;
-    }
+    // getters e setters
 
     public Long getId() {
         return id;
@@ -37,20 +26,27 @@ public class Account {
         this.id = id;
     }
 
-    public String getAccountName() {
-        return AccountName;
-    }
-
-    public void setAccountName(String accountName) {
-        AccountName = accountName;
-    }
-
-    public BigDecimal getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
+    public LocalDate getMemberSince() {
+        return memberSince;
+    }
+
+    public void setMemberSince(LocalDate memberSince) {
+        this.memberSince = memberSince;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 }

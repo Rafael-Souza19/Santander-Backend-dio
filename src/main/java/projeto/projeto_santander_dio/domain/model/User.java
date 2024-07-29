@@ -1,13 +1,10 @@
 package projeto.projeto_santander_dio.domain.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
-
 
 @Entity(name= "tb_user")
 public class User {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,17 +13,16 @@ public class User {
     private String nickName;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id") // Adiciona esta anotação para garantir o mapeamento correto
     private Account account;
 
-    @OneToMany
-    private List<Games> games;
-
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Features> features;
 
-    @OneToMany(targetEntity = News.class)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<News> news;
 
+    // getters e setters
 
     public Long getId() {
         return id;
@@ -50,14 +46,6 @@ public class User {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public Games getGames() {
-        return (Games) games;
-    }
-
-    public void setGames(Games games) {
-        this.games = (List<Games>) games;
     }
 
     public List<Features> getFeatures() {

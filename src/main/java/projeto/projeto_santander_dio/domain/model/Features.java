@@ -1,14 +1,9 @@
 package projeto.projeto_santander_dio.domain.model;
 
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity(name= "tb_features")
+@Entity(name = "tb_features")
 public class Features {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +13,11 @@ public class Features {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    // getters e setters
     public Long getId() {
         return id;
     }
@@ -41,5 +40,13 @@ public class Features {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
